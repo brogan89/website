@@ -212,6 +212,7 @@ main,
 }
 .card-status.live { color: var(--cyan); border-color: rgba(34, 224, 214, 0.4); }
 .card-status.building { color: var(--magenta); border-color: rgba(255, 77, 216, 0.4); }
+.card-status.prototype { color: var(--violet); border-color: rgba(139, 107, 255, 0.5); }
 .card-status.idea { color: var(--muted); }
 
 .card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }

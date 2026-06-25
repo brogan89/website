@@ -6,7 +6,7 @@
 
   yearEl.textContent = new Date().getFullYear();
 
-  const STATUS_LABELS = { live: "Live", building: "Building", idea: "Idea" };
+  const STATUS_LABELS = { live: "Live", building: "Building", prototype: "Prototype", idea: "Idea" };
 
   function cardTemplate(p, index) {
     const statusLabel = STATUS_LABELS[p.status] || p.status;
