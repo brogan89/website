@@ -12,8 +12,8 @@
     const statusLabel = STATUS_LABELS[p.status] || p.status;
     const tags = p.tags.map((t) => `<span class="tag">${t}</span>`).join("");
     const link = p.link
-      ? `<a class="card-link" href="${p.link}" target="_blank" rel="noopener">view project →</a>`
-      : `<span class="card-link disabled">coming soon</span>`;
+      ? `<button type="button" class="card-link" data-link="${p.link}">view project →</button>`
+      : `<button type="button" class="card-link disabled" disabled>coming soon</button>`;
 
     return `
       <article class="card" style="animation-delay:${index * 60}ms">
@@ -50,6 +50,12 @@
       render(btn.dataset.filter);
     });
   }
+
+  projectsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".card-link[data-link]");
+    if (!btn) return;
+    window.open(btn.dataset.link, "_blank", "noopener");
+  });
 
   buildFilters();
   render("all");
