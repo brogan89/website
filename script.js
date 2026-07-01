@@ -26,8 +26,9 @@
       ? `<button type="button" class="card-link" data-link="${p.link}">view project →</button>`
       : `<button type="button" class="card-link disabled" disabled>coming soon</button>`;
 
+    const imagePos = p.imagePosition || "center top";
     const imageBanner = p.image
-      ? `<div class="card-image" style="--project-image: url('${p.image}')"></div>`
+      ? `<div class="card-image" style="--project-image: url('${p.image}'); --image-position: ${imagePos}"></div>`
       : `<div class="card-image"></div>`;
 
     return `

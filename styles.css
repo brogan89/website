@@ -211,7 +211,7 @@ main,
   z-index: 0;
   background-image: var(--project-image, linear-gradient(135deg, rgba(139, 107, 255, 0.2) 0%, rgba(34, 224, 214, 0.06) 100%));
   background-size: cover;
-  background-position: center top;
+  background-position: var(--image-position, center top);
 }
 .card-image::after {
   content: "";

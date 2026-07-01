@@ -12,6 +12,7 @@ const SOCIALS = [
 // Edit this list to add / update your projects.
 // status: "live" | "building" | "idea"
 // link: a URL, or leave as "" to show a disabled placeholder.
+// imagePosition: CSS background-position value, e.g. "center center", "top", "50% 30%" (default: "center top")
 const PROJECTS = [
   {
     icon: "🏌️‍♂️",
@@ -26,6 +27,7 @@ const PROJECTS = [
     icon: "🎸",
     title: "Dolphin Drive",
     image: "https://www.muzic.nz/wp-content/uploads/gallery/JW08714.jpg",
+    imagePosition: "center 30%",
     status: "live",
     description: "Rock band from Hamilton, New Zealand!",
     tags: ["band", "music"],
