@@ -1,4 +1,4 @@
-# brogan.dev
+# brogan.king
 
 A personal projects site — a living list of things Brogan is building, shipping, or prototyping. Deployed as a static site via GitHub Pages.
 
