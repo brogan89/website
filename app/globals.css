@@ -361,3 +361,12 @@
 
 .rs-blink { animation: blink 1s steps(1) infinite; }
 
+
+.rs-meter { transform-box: fill-box; transform-origin: bottom; animation: rs-meter var(--dur) ease-in-out infinite alternate; }
+@keyframes rs-meter {
+  0% { transform: scaleY(0.2); }
+  30% { transform: scaleY(0.85); }
+  55% { transform: scaleY(0.45); }
+  80% { transform: scaleY(1); }
+  100% { transform: scaleY(0.3); }
+}
