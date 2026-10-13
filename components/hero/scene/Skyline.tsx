@@ -1,18 +1,10 @@
 // Neon city skyline that sits on the hero's horizon line.
 // Everything is generated from a fixed seed so server and client markup match.
 
+import { rng } from "@/lib/rng";
+
 const W = 1440;
 const H = 420;
-
-function rng(seed: number) {
-  return () => {
-    seed |= 0;
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 
 type Building = { x: number; w: number; h: number; antenna: boolean; sign?: { text: string; color: string } };
 
@@ -66,9 +58,10 @@ function windows(b: Building, seed: number) {
   return out;
 }
 
-export function Skyline() {
+// Renders as a nested <svg> so it can be placed inside a larger scene.
+export function Skyline({ x, y, width, height }: { x: number; y: number; width: number; height: number }) {
   return (
-    <svg className="absolute inset-0 size-full" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <svg x={x} y={y} width={width} height={height} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
       <defs>
         <linearGradient id="sky-far" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#2a1a5c" />
@@ -112,15 +105,8 @@ export function Skyline() {
       {NEAR.map((b, i) => (
         <g key={`n${b.x}`}>
           <rect x={b.x} y={H - b.h} width={b.w} height={b.h} fill="url(#sky-near)" />
-          <line
-            x1={b.x}
-            x2={b.x + b.w}
-            y1={H - b.h + 0.5}
-            y2={H - b.h + 0.5}
-            stroke={i % 2 ? "#22e0d6" : "#ff4dd8"}
-            strokeOpacity="0.6"
-            filter="url(#sky-glow)"
-          />
+          <line x1={b.x} x2={b.x + b.w} y1={H - b.h + 0.5} y2={H - b.h + 0.5} stroke={i % 2 ? "#22e0d6" : "#ff4dd8"} strokeOpacity=".18" strokeWidth="5" />
+          <line x1={b.x} x2={b.x + b.w} y1={H - b.h + 0.5} y2={H - b.h + 0.5} stroke={i % 2 ? "#22e0d6" : "#ff4dd8"} strokeOpacity=".7" />
           {windows(b, i * 97 + 3).map((w) => (
             <rect
               key={`${w.x}-${w.y}`}

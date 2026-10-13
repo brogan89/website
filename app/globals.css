@@ -231,9 +231,6 @@
   .glitch::before, .glitch::after, .noise { display: none; }
 }
 
-@keyframes floor-run {
-  to { background-position: 0 64px; }
-}
 @keyframes marquee {
   to { transform: translateX(-50%); }
 }
@@ -268,45 +265,61 @@
   91%, 93% { opacity: 0.35; }
 }
 
-.searchlight {
-  position: absolute;
-  bottom: 0;
-  width: 140px;
-  height: 130%;
-  transform-origin: 50% 100%;
-  background: linear-gradient(to top, rgb(34 224 214 / 0.22), transparent 85%);
-  clip-path: polygon(46% 100%, 54% 100%, 100% 0, 0 0);
-  filter: blur(6px);
-  animation: sweep 9s ease-in-out infinite alternate;
-}
-@keyframes sweep {
-  from { transform: rotate(-28deg); }
-  to { transform: rotate(24deg); }
+/* ---------- Hero room scene ---------- */
+.rs-rain { animation: rs-fall var(--dur) linear var(--delay) infinite; }
+@keyframes rs-fall { to { transform: translateY(720px); } }
+
+.rs-rivulet { animation: rs-slide var(--dur) cubic-bezier(0.5, 0, 0.8, 0.6) var(--delay) infinite; }
+@keyframes rs-slide {
+  0% { transform: translateY(0); opacity: 0; }
+  8%, 90% { opacity: 1; }
+  100% { transform: translateY(560px); opacity: 0; }
 }
 
-.spinner-car {
-  position: absolute;
-  height: 2px;
-  width: 70px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, transparent, var(--car, #ff4dd8));
-  box-shadow: 0 0 10px var(--car, #ff4dd8);
-  animation: fly var(--dur, 11s) linear infinite;
-}
-@keyframes fly {
-  from { transform: translateX(-10vw); }
-  to { transform: translateX(110vw); }
+.rs-fan { transform-box: fill-box; transform-origin: center; animation: rs-spin 0.9s linear infinite; }
+@keyframes rs-spin { to { transform: rotate(360deg); } }
+
+.rs-code { animation: rs-code 16s linear infinite; }
+@keyframes rs-code { to { transform: translateY(var(--scroll)); } }
+
+.rs-neon { animation: rs-neon 7s steps(1) infinite; }
+@keyframes rs-neon {
+  0%, 86%, 100% { opacity: 1; }
+  87% { opacity: 0.35; }
+  88% { opacity: 1; }
+  90% { opacity: 0.2; }
+  91% { opacity: 1; }
 }
 
-.rain-drop {
-  position: absolute;
-  top: -20%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgb(160 190 255 / 0.5));
-  animation: rain-fall var(--dur) linear infinite;
-  animation-delay: var(--delay);
+.rs-sway { transform-box: view-box; animation: rs-sway 6s ease-in-out infinite alternate; }
+@keyframes rs-sway {
+  from { transform: rotate(-1.3deg); }
+  to { transform: rotate(1.3deg); }
 }
-@keyframes rain-fall {
-  to { transform: translateY(140vh); }
+
+.rs-lightning { opacity: 0; animation: rs-lightning 13s linear infinite; }
+@keyframes rs-lightning {
+  0%, 90%, 100% { opacity: 0; }
+  90.5% { opacity: 0.3; }
+  91.2% { opacity: 0.04; }
+  92% { opacity: 0.22; }
+  94% { opacity: 0; }
 }
+
+.rs-car { animation: rs-car var(--dur) linear var(--delay) infinite; }
+@keyframes rs-car {
+  from { transform: translateX(-120px); }
+  to { transform: translateX(1600px); }
+}
+
+.rs-beam { transform-box: view-box; animation: rs-beam 10s ease-in-out infinite alternate; }
+@keyframes rs-beam {
+  from { transform: rotate(-22deg); }
+  to { transform: rotate(22deg); }
+}
+
+.rs-pulse { animation: rs-pulse 3s ease-in-out infinite; }
+@keyframes rs-pulse { 50% { opacity: 0.5; } }
+
+.rs-blink { animation: blink 1s steps(1) infinite; }
 

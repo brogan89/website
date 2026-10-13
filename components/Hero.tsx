@@ -3,22 +3,20 @@
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { BootLog } from "./hero/BootLog";
-import { CircuitGrid } from "./hero/CircuitGrid";
 import { GlitchTitle } from "./hero/GlitchTitle";
 import { Marquee } from "./hero/Marquee";
+import { RoomScene } from "./hero/scene/RoomScene";
 import { TypedRoles } from "./hero/TypedRoles";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
 
-  // Mouse parallax: background and foreground drift in opposite directions.
+  // Mouse parallax: the scene's layers drift at different depths, the copy drifts the other way.
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 60, damping: 18 });
   const sy = useSpring(my, { stiffness: 60, damping: 18 });
-  const bgX = useTransform(sx, (v) => v * -18);
-  const bgY = useTransform(sy, (v) => v * -12);
   const fgX = useTransform(sx, (v) => v * 14);
   const fgY = useTransform(sy, (v) => v * 10);
 
@@ -39,11 +37,18 @@ export function Hero() {
         my.set((e.clientY - r.top) / r.height - 0.5);
       }}
     >
-      <motion.div className="absolute inset-[-24px]" style={{ x: bgX, y: bgY }}>
-        <CircuitGrid />
+      <motion.div
+        className="absolute inset-0"
+        initial={reduce ? false : { opacity: 0, scale: 1.08 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <RoomScene mx={sx} my={sy} />
       </motion.div>
-      <div className="pointer-events-none absolute -top-40 -left-32 size-[520px] rounded-full bg-violet opacity-30 blur-[140px]" />
-      <div className="pointer-events-none absolute top-40 -right-40 size-[460px] rounded-full bg-cyan opacity-20 blur-[140px]" />
+      {/* Keep the copy readable over the scene */}
+      <div className="pointer-events-none absolute inset-0 bg-void/55 bg-gradient-to-r from-void/80 via-void/40 to-transparent md:bg-transparent md:from-void/90 md:via-void/45" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgb(5_5_12/0.7))]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-void to-transparent" />
 
       <motion.div
         className="relative z-10 mx-auto flex w-[min(1200px,92vw)] flex-1 flex-col justify-center pt-28 pb-16"
