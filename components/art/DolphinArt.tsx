@@ -8,7 +8,7 @@ const BAND_PHOTO = "https://www.muzic.nz/wp-content/uploads/gallery/JW08714.jpg"
 // Resting heights for the equaliser bars (0–1), fixed so server and client markup match.
 const BARS = [0.35, 0.6, 0.45, 0.8, 0.55, 0.9, 0.4, 0.7, 0.5, 0.85, 0.3, 0.65, 0.75, 0.45, 0.95, 0.5, 0.6, 0.35, 0.8, 0.55, 0.7, 0.4, 0.6, 0.3];
 
-// Band photo in a cyan/magenta duotone, the grunge logo flickering on like a neon sign, and a bouncing EQ.
+// Band photo in a cyan/magenta duotone, the hand-drawn logo flickering on like a neon sign, and a bouncing EQ.
 export function DolphinArt({ active, inView }: ArtProps) {
   const reduce = useReducedMotion();
   return (
@@ -28,7 +28,7 @@ export function DolphinArt({ active, inView }: ArtProps) {
       <motion.img
         src={asset("/media/dolphin/logo.webp")}
         alt="Dolphin Drive"
-        className="absolute top-[12%] left-[11%] z-[5] w-[78%] mix-blend-screen"
+        className="absolute top-[8%] left-[14%] z-[5] w-[72%] drop-shadow-[0_6px_24px_rgb(0_0_0/0.75)]"
         initial={false}
         animate={
           inView && !reduce

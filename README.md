@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:3000/website/. The `/website` prefix is the GitHub Pages basePath.
+This opens http://localhost:3000/website/ in your browser once the server is ready ([`scripts/dev.mjs`](scripts/dev.mjs)). The `/website` prefix is the GitHub Pages basePath.
 
 Other scripts: `npm run build` (static export into `out/`), `npm run lint`, `npm run typecheck`.
 
@@ -24,7 +24,7 @@ Other scripts: `npm run build` (static export into `out/`), `npm run lint`, `npm
 - [`components/art/`](components/art) holds one art component per project:
   - `SgrArt` cycles through gameplay loops, and the key-art crew bursts out of the frame.
   - `EngineArt` shows the editor in a window frame, with a boot terminal on hover.
-  - `DolphinArt` puts the band photo in duotone, with a flickering logo and an equaliser.
+  - `DolphinArt` puts the band photo in duotone, with a flickering hand-drawn logo and an equaliser.
   - `DemoifyArt` animates a waveform player, version cards and a timestamped comment.
 - `public/media/<project>/` holds graphics copied from each project's own repo and compressed to WebP. Plain `<img>`/`<video>` srcs go through [`lib/asset.ts`](lib/asset.ts) to get the basePath prefix.
 

@@ -2,7 +2,7 @@
   "name": "brogan-website",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "lint": "eslint",
     "typecheck": "tsc --noEmit"
