@@ -1,8 +1,11 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { Rain } from "./Rain";
+import { Skyline } from "./Skyline";
 
-// Circuit traces that run in from the edges, each with a light packet pulsing along it.
+// Hero backdrop: circuit traces with light packets, searchlights, flying cars, a neon skyline,
+// the synthwave floor and rain. Circuit traces that run in from the edges:
 const TRACES = [
   "M0 140 H180 L230 190 H420",
   "M0 520 H120 L170 470 H300 L340 430",
@@ -22,27 +25,6 @@ export function CircuitGrid() {
   const reduce = useReducedMotion();
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      {/* Horizon sun, clipped at the horizon line */}
-      <div className="absolute inset-x-0 top-0 bottom-[46%] overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 size-[min(46vw,520px)] -translate-x-1/2 translate-y-1/2 rounded-full bg-gradient-to-b from-volt via-magenta to-violet opacity-[0.22] [mask-image:repeating-linear-gradient(to_bottom,#000_0_14px,transparent_14px_20px)]" />
-      </div>
-
-      {/* Synthwave floor: a perspective grid rushing toward the viewer */}
-      <div className="absolute inset-x-0 bottom-0 h-[46%] [perspective:420px]">
-        <div
-          className="absolute inset-x-[-50%] bottom-[-10%] h-[160%] origin-bottom [transform:rotateX(68deg)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgb(139 107 255 / 0.55) 1.5px, transparent 1.5px), linear-gradient(90deg, rgb(34 224 214 / 0.4) 1.5px, transparent 1.5px)",
-            backgroundSize: "64px 64px",
-            animation: reduce ? undefined : "floor-run 1.2s linear infinite",
-            maskImage: "linear-gradient(to top, #000 10%, transparent 85%)",
-          }}
-        />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-magenta to-transparent shadow-[0_0_24px_4px_rgb(255_77_216/0.6)]" />
-      </div>
-
-
       <svg className="absolute inset-0 size-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="trace" x1="0" x2="1">
@@ -100,6 +82,45 @@ export function CircuitGrid() {
           />
         ))}
       </svg>
+      {/* Searchlights sweeping up from behind the city */}
+      {!reduce && (
+        <div className="absolute inset-x-0 top-0 bottom-[46%] overflow-hidden">
+          <div className="searchlight left-[18%]" />
+          <div className="searchlight left-[72%] [animation-delay:-4s] [animation-duration:11s]" />
+        </div>
+      )}
+
+      {/* Flying cars crossing the sky */}
+      {!reduce && (
+        <>
+          <span className="spinner-car top-[18%]" style={{ ["--dur" as string]: "13s", ["--car" as string]: "#22e0d6" }} />
+          <span className="spinner-car top-[30%] [animation-delay:-6s]" style={{ ["--dur" as string]: "9s" }} />
+          <span className="spinner-car top-[40%] [animation-direction:reverse] [animation-delay:-3s]" style={{ ["--dur" as string]: "16s", ["--car" as string]: "#f5f05a" }} />
+        </>
+      )}
+
+      {/* Neon city on the horizon */}
+      <div className="absolute inset-x-0 bottom-[46%] h-[42%]">
+        <Skyline />
+      </div>
+
+      {/* Synthwave floor: a perspective grid rushing toward the viewer */}
+      <div className="absolute inset-x-0 bottom-0 h-[46%] [perspective:420px]">
+        <div
+          className="absolute inset-x-[-50%] bottom-[-10%] h-[160%] origin-bottom [transform:rotateX(68deg)]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgb(139 107 255 / 0.55) 1.5px, transparent 1.5px), linear-gradient(90deg, rgb(34 224 214 / 0.4) 1.5px, transparent 1.5px)",
+            backgroundSize: "64px 64px",
+            animation: reduce ? undefined : "floor-run 1.2s linear infinite",
+            maskImage: "linear-gradient(to top, #000 10%, transparent 85%)",
+          }}
+        />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-magenta to-transparent shadow-[0_0_24px_4px_rgb(255_77_216/0.6)]" />
+      </div>
+
+
+      {!reduce && <Rain />}
     </div>
   );
 }

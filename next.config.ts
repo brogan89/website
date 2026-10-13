@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
-// Served from GitHub Pages at brogan89.github.io/website. Set BASE_PATH="" to serve from the root.
-const basePath = process.env.BASE_PATH ?? "/website";
+// Served from the root of broganking.com (GitHub Pages custom domain).
+// Set BASE_PATH (e.g. "/website") to serve from a sub-path instead.
+const basePath = process.env.BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   output: "export",

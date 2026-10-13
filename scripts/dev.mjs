@@ -2,7 +2,7 @@
 // Picks up the real port from Next's output, so it still works if 3000 is taken.
 import { spawn } from "node:child_process";
 
-const basePath = process.env.BASE_PATH ?? "/website";
+const basePath = process.env.BASE_PATH ?? "";
 const opener = { darwin: "open", win32: "start" }[process.platform] ?? "xdg-open";
 
 const next = spawn("npx", ["next", "dev", ...process.argv.slice(2)], {
