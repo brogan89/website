@@ -1,53 +1,41 @@
 # brogan.king
 
-A personal projects site — a living list of things Brogan is building, shipping, or prototyping. Deployed as a static site via GitHub Pages.
+Personal projects site: a glitchy cyberpunk hero followed by showcase panels for what I'm building right now (Speed Golf Royale, Mainframe Engine, Dolphin Drive, Demoify).
 
-## Overview
-
-This is a single-page, vanilla HTML/CSS/JS site with no build step, no framework, and no dependencies. It renders a header, hero section, status filters, and a responsive grid of project cards, each sourced from a plain JS data file.
-
-The visual style is a dark, glowing "terminal/cyberpunk" aesthetic — `JetBrains Mono` for technical labels, `Space Grotesk` for display text, a cyan/violet/magenta accent palette, a faint animated grid background, and soft blurred glow orbs.
-
-## How it works
-
-- **[`index.html`](index.html)** — the page shell. Contains the header, hero copy, and two empty containers (`#filters` and `#projects`) that get populated at runtime. Loads `projects.js` then `script.js` as plain `<script>` tags (no modules/bundler).
-- **[`projects.js`](projects.js)** — the content. A single `PROJECTS` array of plain objects; this is the only file you need to edit to add, remove, or update a project. Each entry has:
-  - `icon` — an emoji shown in the card's icon badge
-  - `title` — project name
-  - `status` — one of `"live"`, `"building"`, `"prototype"`, `"idea"` (drives the colored status pill and the filter buttons)
-  - `description` — a sentence or two of body copy
-  - `tags` — an array of short strings rendered as pills
-  - `link` — a URL to the project, or `""` to render a disabled "coming soon" button instead
-- **[`script.js`](script.js)** — all rendering logic, wrapped in an IIFE:
-  - Renders the year in the footer
-  - Builds the filter button row from the distinct `status` values present in `PROJECTS` (always prepending an "All" filter)
-  - Renders project cards into `#projects` via template strings + `innerHTML`
-  - Filtering is handled by re-rendering the list on filter-button click (event delegation on `#filters`)
-  - The "view project" / "coming soon" control is a real `<button>` (not an anchor) so it has correct semantics and a visible disabled state; clicking a non-disabled button opens its `link` via `window.open(..., "_blank", "noopener")` (event delegation on `#projects`)
-- **[`styles.css`](styles.css)** — all styling, including:
-  - CSS custom properties on `:root` for the color palette and corner radius
-  - Decorative fixed-position grid background and blurred "glow" orbs (`.grid-bg`, `.glow-1`, `.glow-2`), all `pointer-events: none` so they never intercept clicks
-  - Card entrance animation (`@keyframes rise`) and a `prefers-reduced-motion` override that disables all animation
-  - A hover glow effect on cards via `.card::before` (also `pointer-events: none` — this overlay sits in front of in-flow card content in paint order, so it must stay click-through)
-
-There is no client-side router, no state management, and no network calls beyond loading Google Fonts — `PROJECTS` is the entire data layer.
+Built with **Next.js 16** (App Router, static export), **React 19**, **Tailwind v4** and **Motion** for animation. Deployed to GitHub Pages at `brogan89.github.io/website`.
 
 ## Running locally
 
-This repo includes a [`Justfile`](Justfile) (requires [`just`](https://github.com/casey/just)) with a single recipe:
-
 ```sh
-just run
+npm install
+npm run dev
 ```
 
-This frees up port `8000` if anything is already bound to it, starts `python3 -m http.server 8000` in the background, and opens `http://localhost:8000` in your default browser with a cache-busting query param (so it's always a fresh navigation, not a stale reused tab). Press `Ctrl+C` to stop the server.
+Then open http://localhost:3000/website/. The `/website` prefix is the GitHub Pages basePath.
 
-No `just`? Any static file server works, e.g. `python3 -m http.server 8000`, then open `http://localhost:8000` manually.
+Other scripts: `npm run build` (static export into `out/`), `npm run lint`, `npm run typecheck`.
 
-## Deployment
+## Structure
 
-The site is deployed via **GitHub Pages**, served directly from this repo with no build step. [`.nojekyll`](.nojekyll) disables GitHub's default Jekyll processing so files (e.g. anything prefixed with `_`) are served as-is.
+- [`lib/projects.ts`](lib/projects.ts) holds the content: `SOCIALS` (header icons) and `PROJECTS` (rendered top to bottom in array order). Each project has a title, kicker, status, description, tags, link, CTA label and an `accent` colour that drives its glow, border trace and buttons.
+- [`app/`](app) has the root layout (fonts and global background layers: grid, scanlines, noise, cursor glow), the page and [`globals.css`](app/globals.css), which holds the theme tokens, glitch, panel border-trace keyframes and the reduced-motion overrides.
+- [`components/Hero.tsx`](components/Hero.tsx) and [`components/hero/`](components/hero) build the hero: the boot log, the scramble/glitch title, typed roles, the animated SVG circuit traces with the synthwave floor, and the project marquee.
+- [`components/ProjectPanel.tsx`](components/ProjectPanel.tsx) is the shared panel shell. It alternates sides, reveals on scroll, tilts in 3D with the pointer, and shows a glare and a conic border trace. It passes `active` (hovered, or on screen for touch devices) and `inView` to the project's art.
+- [`components/art/`](components/art) holds one art component per project:
+  - `SgrArt` cycles through gameplay loops, and the key-art crew bursts out of the frame.
+  - `EngineArt` shows the editor in a window frame, with a boot terminal on hover.
+  - `DolphinArt` puts the band photo in duotone, with a flickering logo and an equaliser.
+  - `DemoifyArt` animates a waveform player, version cards and a timestamped comment.
+- `public/media/<project>/` holds graphics copied from each project's own repo and compressed to WebP. Plain `<img>`/`<video>` srcs go through [`lib/asset.ts`](lib/asset.ts) to get the basePath prefix.
+
+Everything respects `prefers-reduced-motion`: glitch, tilt, typing and video autoplay switch off.
 
 ## Adding or editing a project
 
-Edit the `PROJECTS` array in [`projects.js`](projects.js) — no other file needs to change. Leave `link` as `""` to show a disabled "coming soon" state until the project has somewhere to link to.
+1. Add an entry to `PROJECTS` in `lib/projects.ts`.
+2. Add an art component in `components/art/`.
+3. Register the art component in the `ART` map in [`components/Projects.tsx`](components/Projects.tsx).
+
+## Deployment
+
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds the static export on every push to `main` and publishes `out/` with GitHub Pages. In the repo settings, **Settings → Pages → Source** must be set to **GitHub Actions**. [`public/.nojekyll`](public/.nojekyll) stops Jekyll from processing the output. To serve from a domain root instead, build with `BASE_PATH=""`.
