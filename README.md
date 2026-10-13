@@ -7,8 +7,8 @@ A portfolio of the things I'm building right now: games, a game engine, music, a
 | Project | What it is |
 |---|---|
 | [**Speed Golf Royale**](https://speedgolfroyale.com/) | A multiplayer racing golf game where a whole lobby tees off at once and the first to hole out wins. Built in Godot, in development. |
-| [**Mainframe Engine**](https://mainframe-games.github.io/mainframe-engine/) | My open-source C# game engine and Godot-style editor, built on Vulkan. |
 | [**Dolphin Drive**](https://dolphindrive.band/) | My rock band from Hamilton, New Zealand. |
+| [**Mainframe Engine**](https://mainframe-games.github.io/mainframe-engine/) | My open-source C# game engine and Godot-style editor, built on Vulkan. |
 | [**Demoify**](https://demoify.app/) | "GitHub for songs": versioned demo sharing with timestamped feedback for musicians. |
 
 ## Running it locally
