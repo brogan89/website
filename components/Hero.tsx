@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { BootLog } from "./hero/BootLog";
 import { GlitchTitle } from "./hero/GlitchTitle";
 import { Marquee } from "./hero/Marquee";
 import { RoomScene } from "./hero/scene/RoomScene";
 import { TypedRoles } from "./hero/TypedRoles";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);

@@ -1,11 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { rng } from "@/lib/rng";
 import { DawApp } from "./DawApp";
 import { EngineApp } from "./EngineApp";
 import { APP, APP_W, DOCK_H, SCREEN as S } from "./screenLayout";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const SWITCH_MS = 6500;
 type AppName = "engine" | "daw";

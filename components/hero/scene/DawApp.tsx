@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { rng, r2 } from "@/lib/rng";
 import { APP } from "./screenLayout";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const HEADER_W = 41;
 const TOP = APP.y + 19; // below title bar + ruler

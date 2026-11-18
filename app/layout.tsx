@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Orbitron, Space_Grotesk } from "next/font/google";
 import { CursorGlow } from "@/components/CursorGlow";
+import { MotionProvider } from "@/components/MotionProvider";
 import "./globals.css";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["700", "900"], variable: "--font-orbitron", display: "swap" });
@@ -19,8 +20,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${orbitron.variable} ${grotesk.variable} ${jetbrains.variable}`}>
       <body className="min-h-dvh antialiased">
         <div className="bg-grid" aria-hidden="true" />
-        <CursorGlow />
-        {children}
+        <MotionProvider>
+          <CursorGlow />
+          {children}
+        </MotionProvider>
         <div className="scanlines" aria-hidden="true" />
         <div className="noise" aria-hidden="true" />
       </body>

@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useAnimationFrame, useReducedMotion } from "motion/react";
+import { motion, useAnimationFrame } from "motion/react";
 import { useRef } from "react";
 import { r2 } from "@/lib/rng";
 import { APP } from "./screenLayout";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const TREE_W = 52;
 const VIEW = { x: APP.x + TREE_W + 1, y: APP.y + 19, w: APP.w - TREE_W - 1, h: APP.h - 19 };

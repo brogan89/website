@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { asset } from "@/lib/asset";
 import type { ArtProps } from "../ProjectPanel";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const BAND_PHOTO = "https://www.muzic.nz/wp-content/uploads/gallery/JW08714.jpg";
 // Resting heights for the equaliser bars (0–1), fixed so server and client markup match.

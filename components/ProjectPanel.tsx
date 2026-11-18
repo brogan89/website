@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
+import { motion, useInView, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useState, type ComponentType } from "react";
 import type { Project } from "@/lib/projects";
 import { useCanHover } from "@/lib/useCanHover";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export type ArtProps = { active: boolean; inView: boolean };
 
