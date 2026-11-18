@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { BRUTAL, INDIE, INTERESTS, JOBS, QUALIFICATIONS, RESUME, SKILLS, STATS, type Job } from "@/lib/resume";
+import { asset } from "@/lib/asset";
 import { SOCIALS } from "@/lib/projects";
 
 // The A4 layout behind the downloadable PDF. Hidden on screen, it replaces the page when
@@ -114,15 +115,22 @@ export function ResumePrint() {
     <div className="hidden print:block">
       <Sheet page={1}>
         <header className="flex items-end justify-between gap-[6mm] border-b border-line pb-[5mm]">
-          <div>
-            <p className="font-mono text-[7pt] text-cyan">{"// resume"}</p>
-            <h1 className="mt-[1.5mm] font-display text-[30pt] leading-[0.95] font-black tracking-tight">
-              <span>{firstName}</span>{" "}
-              <span className="bg-gradient-to-r from-cyan via-violet to-magenta bg-clip-text text-transparent">{lastName}</span>
-            </h1>
-            <p className="mt-[2mm] font-mono text-[8.5pt] text-muted">
-              <span className="text-magenta">&gt;</span> {RESUME.headline.toLowerCase()}
-            </p>
+          <div className="flex items-center gap-[5mm]">
+            <img
+              src={asset(RESUME.photo)}
+              alt={`Portrait of ${RESUME.name}`}
+              className="size-[27mm] shrink-0 rounded-[2.5mm] border-[0.4mm] border-cyan/60 object-cover"
+            />
+            <div>
+              <p className="font-mono text-[7pt] text-cyan">{"// resume"}</p>
+              <h1 className="mt-[1.5mm] font-display text-[30pt] leading-[0.95] font-black tracking-tight">
+                <span>{firstName}</span>{" "}
+                <span className="bg-gradient-to-r from-cyan via-violet to-magenta bg-clip-text text-transparent">{lastName}</span>
+              </h1>
+              <p className="mt-[2mm] font-mono text-[8.5pt] text-muted">
+                <span className="text-magenta">&gt;</span> {RESUME.headline.toLowerCase()}
+              </p>
+            </div>
           </div>
           <ul className="space-y-[0.8mm] text-right font-mono text-[7pt] text-muted">
             <li>{RESUME.location}</li>
