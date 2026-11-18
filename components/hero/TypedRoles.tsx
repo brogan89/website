@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const ROLES = ["game developer", "engine builder", "guitarist", "web tinkerer", "always shipping"];
 
 // Types each role out, holds, deletes it, then moves on to the next.
-export function TypedRoles({ startDelay = 0 }: { startDelay?: number }) {
+export function TypedRoles({ startDelay = 0, roles = ROLES }: { startDelay?: number; roles?: string[] }) {
   const reduce = useReducedMotion();
   const [role, setRole] = useState(0);
   const [len, setLen] = useState(0);
@@ -20,7 +20,7 @@ export function TypedRoles({ startDelay = 0 }: { startDelay?: number }) {
 
   useEffect(() => {
     if (!started || reduce) return;
-    const word = ROLES[role];
+    const word = roles[role];
     let wait = deleting ? 35 : 70;
     if (!deleting && len === word.length) wait = 1600;
     if (deleting && len === 0) wait = 300;
@@ -28,15 +28,15 @@ export function TypedRoles({ startDelay = 0 }: { startDelay?: number }) {
       if (!deleting && len === word.length) setDeleting(true);
       else if (deleting && len === 0) {
         setDeleting(false);
-        setRole((r) => (r + 1) % ROLES.length);
+        setRole((r) => (r + 1) % roles.length);
       } else setLen((l) => l + (deleting ? -1 : 1));
     }, wait);
     return () => clearTimeout(t);
-  }, [started, reduce, role, len, deleting]);
+  }, [started, reduce, role, len, deleting, roles]);
 
-  const text = reduce ? ROLES.slice(0, 3).join(" // ") : ROLES[role].slice(0, len);
+  const text = reduce ? roles.slice(0, 3).join(" // ") : roles[role].slice(0, len);
   return (
-    <p className="font-mono text-base text-muted sm:text-lg" aria-label={ROLES.join(", ")}>
+    <p className="font-mono text-base text-muted sm:text-lg" aria-label={roles.join(", ")}>
       <span className="text-magenta">&gt;</span> <span className="text-text">{text}</span>
       <span className="caret" aria-hidden="true" />
     </p>
