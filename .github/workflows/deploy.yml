@@ -25,6 +25,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Re-print the resume PDF from this build so it never goes stale. If Chrome fails,
+      # the committed public/brogan-king-resume.pdf (already copied into out/) still ships.
+      - run: node scripts/resume-pdf.mjs
+        continue-on-error: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

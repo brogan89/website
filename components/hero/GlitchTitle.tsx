@@ -9,7 +9,7 @@ type Phase = "hidden" | "intro" | "idle";
 
 // Each line glitches in (flicker, jitter and RGB-split slices that decay), then settles
 // into an occasional subtle glitch.
-function Line({ text, delay, className }: { text: string; delay: number; className?: string }) {
+export function GlitchLine({ text, delay, className }: { text: string; delay: number; className?: string }) {
   const reduce = useReducedMotion() ?? false;
   const [phase, setPhase] = useState<Phase>("hidden");
 
@@ -36,8 +36,8 @@ export function GlitchTitle({ delay = 0 }: { delay?: number }) {
     <h1 className="font-display text-[clamp(3.2rem,13vw,10.5rem)] leading-[0.86] font-black tracking-tight uppercase">
       <span className="sr-only">Brogan King</span>
       <span aria-hidden="true">
-        <Line text="BROGAN" delay={delay} className="text-neon" />
-        <Line
+        <GlitchLine text="BROGAN" delay={delay} className="text-neon" />
+        <GlitchLine
           text="KING"
           delay={delay + 0.22}
           className="bg-gradient-to-r from-cyan via-violet to-magenta bg-clip-text text-transparent"

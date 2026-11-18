@@ -23,5 +23,5 @@ export function CursorGlow() {
   }, [reduce, x, y]);
 
   if (reduce) return null;
-  return <motion.div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10" style={{ background }} />;
+  return <motion.div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 print:hidden" style={{ background }} />;
 }

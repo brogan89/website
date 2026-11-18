@@ -5,7 +5,8 @@
     "dev": "node scripts/dev.mjs",
     "build": "next build",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "resume:pdf": "next build && node scripts/resume-pdf.mjs"
   },
   "dependencies": {
     "motion": "^14.1.0",
