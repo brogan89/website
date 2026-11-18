@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 // Vertical timeline whose neon rail fills in as you scroll through it.
 export function Timeline({ children }: { children: ReactNode }) {

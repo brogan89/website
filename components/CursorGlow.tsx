@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { motion, useMotionTemplate, useMotionValue, useSpring } from "motion/react";
 import { useEffect } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 // A soft violet/cyan light that trails the pointer across the whole page.
 export function CursorGlow() {
@@ -22,6 +23,7 @@ export function CursorGlow() {
     return () => window.removeEventListener("pointermove", move);
   }, [reduce, x, y]);
 
-  if (reduce) return null;
+  // Always render (it sits off-screen until the pointer moves) so server and client HTML
+  // match for reduced-motion users; returning null here caused a hydration error.
   return <motion.div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 print:hidden" style={{ background }} />;
 }

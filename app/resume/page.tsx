@@ -59,6 +59,32 @@ function DownloadButton({ className = "" }: { className?: string }) {
   );
 }
 
+function Portrait() {
+  return (
+    <Reveal delay={0.3} className="order-first w-36 sm:w-44 md:order-last md:col-span-4 md:ml-auto md:w-full md:max-w-[340px]">
+      <div className="panel-frame" style={{ ["--accent" as string]: "#22e0d6" }}>
+        <div className="group relative overflow-hidden rounded-[21px] bg-panel">
+          <img
+            src={asset(RESUME.photo)}
+            alt={`Portrait of ${RESUME.name}`}
+            className="aspect-square w-full object-cover saturate-[0.85] transition duration-700 group-hover:scale-105 group-hover:saturate-100"
+          />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan/30 via-transparent to-magenta/40 mix-blend-overlay" />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-transparent" />
+          <div aria-hidden="true" className="art-scanlines" />
+          <div aria-hidden="true" className="corner-brackets" />
+          <p aria-hidden="true" className="absolute inset-x-5 bottom-4 hidden justify-between font-mono text-[11px] text-text/85 sm:flex">
+            <span>
+              <span className="text-cyan">▸</span> player_01
+            </span>
+            <span className="text-[#3cff8f]">● online</span>
+          </p>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 export default function ResumePage() {
   return (
     <>
@@ -71,39 +97,44 @@ export default function ResumePage() {
               aria-hidden="true"
               className="pointer-events-none absolute -top-24 right-0 -z-10 size-[min(520px,80vw)] rounded-full bg-violet/20 blur-[120px]"
             />
-            <BootLog lines={BOOT} />
-            <h1 className="font-display text-[clamp(3rem,12vw,8.5rem)] leading-[0.86] font-black tracking-tight uppercase">
-              <span className="sr-only">{RESUME.name}</span>
-              <span aria-hidden="true">
-                <GlitchLine text="BROGAN" delay={0.5} className="text-neon" />
-                <GlitchLine text="KING" delay={0.72} className="bg-gradient-to-r from-cyan via-violet to-magenta bg-clip-text text-transparent" />
-              </span>
-            </h1>
-            <div className="mt-6">
-              <TypedRoles startDelay={1.2} roles={RESUME.roles} />
+            <div className="grid items-center gap-10 md:grid-cols-12">
+              <div className="md:col-span-8">
+                <BootLog lines={BOOT} />
+                <h1 className="font-display text-[clamp(3rem,12vw,8.5rem)] leading-[0.86] font-black tracking-tight uppercase">
+                  <span className="sr-only">{RESUME.name}</span>
+                  <span aria-hidden="true">
+                    <GlitchLine text="BROGAN" delay={0.5} className="text-neon" />
+                    <GlitchLine text="KING" delay={0.72} className="bg-gradient-to-r from-cyan via-violet to-magenta bg-clip-text text-transparent" />
+                  </span>
+                </h1>
+                <div className="mt-6">
+                  <TypedRoles startDelay={1.2} roles={RESUME.roles} />
+                </div>
+                <p className="mt-2 font-mono text-xs text-muted sm:text-sm">
+                  <span className="text-cyan">@</span> {RESUME.location.toLowerCase()}
+                </p>
+                <Reveal delay={0.9} className="mt-9 flex flex-wrap items-center gap-3">
+                  <DownloadButton />
+                  <ul className="flex flex-wrap gap-2.5">
+                    {CONTACTS.map((c) => (
+                      <li key={c.platform}>
+                        <a
+                          href={c.url}
+                          target={c.platform === "email" ? undefined : "_blank"}
+                          rel="noopener"
+                          aria-label={c.label}
+                          className="flex h-11 items-center gap-2.5 rounded-lg border border-line bg-panel/60 px-3.5 font-mono text-xs text-muted backdrop-blur transition hover:-translate-y-0.5 hover:border-cyan/60 hover:text-cyan hover:shadow-[0_0_18px_rgb(34_224_214/0.35)]"
+                        >
+                          <SocialIcon platform={c.platform} />
+                          <span className={c.platform === "email" ? "" : "hidden md:inline"}>{c.label}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </div>
+              <Portrait />
             </div>
-            <p className="mt-2 font-mono text-xs text-muted sm:text-sm">
-              <span className="text-cyan">@</span> {RESUME.location.toLowerCase()}
-            </p>
-            <Reveal delay={0.9} className="mt-9 flex flex-wrap items-center gap-3">
-              <DownloadButton />
-              <ul className="flex flex-wrap gap-2.5">
-                {CONTACTS.map((c) => (
-                  <li key={c.platform}>
-                    <a
-                      href={c.url}
-                      target={c.platform === "email" ? undefined : "_blank"}
-                      rel="noopener"
-                      aria-label={c.label}
-                      className="flex h-11 items-center gap-2.5 rounded-lg border border-line bg-panel/60 px-3.5 font-mono text-xs text-muted backdrop-blur transition hover:-translate-y-0.5 hover:border-cyan/60 hover:text-cyan hover:shadow-[0_0_18px_rgb(34_224_214/0.35)]"
-                    >
-                      <SocialIcon platform={c.platform} />
-                      <span className={c.platform === "email" ? "" : "hidden md:inline"}>{c.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
           </section>
 
           {/* ---------- Stats ---------- */}

@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/asset";
 import type { ArtProps } from "../ProjectPanel";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const CLIPS = ["01-tee-off-race", "02-slowmo-hole-out", "03-obstacle-chaos"];
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const INTRO_MS = 900;
 
@@ -10,7 +10,7 @@ type Phase = "hidden" | "intro" | "idle";
 // Each line glitches in (flicker, jitter and RGB-split slices that decay), then settles
 // into an occasional subtle glitch.
 export function GlitchLine({ text, delay, className }: { text: string; delay: number; className?: string }) {
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useReducedMotion();
   const [phase, setPhase] = useState<Phase>("hidden");
 
   useEffect(() => {

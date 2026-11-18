@@ -31,6 +31,8 @@ export const RESUME = {
   location: "Hamilton, New Zealand",
   email: "brogan.king@outlook.com",
   website: "https://broganking.com",
+  /** Served from /public. */
+  photo: "/media/resume/brogan.jpg",
   /** Cycled by the typed line under the title. */
   roles: ["technical director", "game developer", "engine builder", "technical producer", "always shipping"],
   summary:

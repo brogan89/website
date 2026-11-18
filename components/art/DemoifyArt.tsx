@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ArtProps } from "../ProjectPanel";
 import { DemoifyMark } from "./DemoifyMark";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const N = 56;
 // Deterministic pseudo-waveform so SSR and client agree.

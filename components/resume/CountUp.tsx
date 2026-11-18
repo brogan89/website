@@ -1,7 +1,8 @@
 "use client";
 
-import { animate, useInView, useReducedMotion } from "motion/react";
+import { animate, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 // Counts from 0 up to `value` the first time it scrolls into view.
 export function CountUp({ value, suffix = "" }: { value: number; suffix?: string }) {

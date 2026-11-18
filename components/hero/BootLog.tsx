@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const LINES = ["init mainframe.sys", "mount /projects ........ 4 found", "link neon.drv", "status: online"];
 

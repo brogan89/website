@@ -1,7 +1,7 @@
 "use client";
 
-import { useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 const ROLES = ["game developer", "engine builder", "guitarist", "web tinkerer", "always shipping"];
 
