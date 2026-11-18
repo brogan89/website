@@ -17,7 +17,7 @@ import { BRUTAL, INDIE, INTERESTS, JOBS, QUALIFICATIONS, RESUME, RESUME_PDF, SKI
 export const metadata: Metadata = {
   title: "Brogan King // Resume",
   description:
-    "Game developer and technical director. Technical production on BRUTAL (Kitten Space Agency, RimWorld), plus Stationeers, Monster Racing League and Blackout Rugby.",
+    "Game developer and technical producer. Technical production on BRUTAL (Kitten Space Agency, RimWorld), plus Stationeers, Monster Racing League and Blackout Rugby.",
 };
 
 const BOOT = ["load resume.dat", `mount /experience ...... ${JOBS.length} roles`, `link /side-projects ... ${INDIE.length} found`, "status: online"];

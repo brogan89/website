@@ -27,16 +27,16 @@ export type Qualification = { title: string; honours?: string; institution: stri
 
 export const RESUME = {
   name: "Brogan King",
-  headline: "Game Developer · Technical Director",
+  headline: "Game Developer · Technical Producer",
   location: "Hamilton, New Zealand",
   email: "brogan.king@outlook.com",
   website: "https://broganking.com",
   /** Served from /public. */
   photo: "/media/resume/brogan.jpg",
   /** Cycled by the typed line under the title. */
-  roles: ["technical director", "game developer", "engine builder", "technical producer", "always shipping"],
+  roles: ["technical producer", "game developer", "engine builder", "always shipping"],
   summary:
-    "Game developer with ten years in the industry, from Unity developer to Senior Technical Director at RocketWerkz. I led technical production on BRUTAL, the C# framework behind Kitten Space Agency and RimWorld's new Waylith engine, and I've shipped and supported live games on Steam across Unity, Godot and custom tech. Outside the day job I build original IP and engine technology under my own studio, Mainframe Games.",
+    "Game developer with ten years in the industry, from Unity developer to Senior Technical Producer at RocketWerkz. I led technical production on BRUTAL, the C# framework behind Kitten Space Agency and RimWorld's new Waylith engine, and I've shipped and supported live games on Steam across Unity, Godot and custom tech. Outside the day job I build original IP and engine technology under my own studio, Mainframe Games.",
 };
 
 export const STATS: { value: number; suffix?: string; label: string }[] = [
@@ -73,7 +73,7 @@ export const JOBS: Job[] = [
   },
   {
     company: "RocketWerkz",
-    role: "Senior Technical Director",
+    role: "Senior Technical Producer",
     start: "Dec 2024",
     end: "May 2026",
     game: { title: "Kitten Space Agency", url: "https://ahwoo.com/app/100000/kitten-space-agency", meta: "BRUTAL · PC" },
