@@ -51,3 +51,6 @@ node_modules/
 out/
 next-env.d.ts
 *.tsbuildinfo
+
+# private job-application drafts
+cover-letters/
